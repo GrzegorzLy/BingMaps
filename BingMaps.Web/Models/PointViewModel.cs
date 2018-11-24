@@ -7,6 +7,18 @@ namespace BingMaps.Web.Models
 {
     public class PointViewModel
     {
-        public string City { get; set; }
+        public string EntityId { get; set; }
+        public string Name { get; set; }
+        public string DisplayName { get; set; }
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
+        public string AddressLine { get; set; }
+        public string Locality { get; set; }
+        public string AdminDistrict { get; set; }
+        public string AdminDistrict2 { get; set; }
+        public string PostalCode { get; set; }
+        public string CountryRegion { get; set; }
+        public string Phone { get; set; }
+        public string EntityTypeId { get; set; }
     }
 }

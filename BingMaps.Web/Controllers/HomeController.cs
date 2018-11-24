@@ -1,7 +1,11 @@
-﻿using BingMaps.Core.Domain;
+﻿using AutoMapper;
+using BingMaps.Core.Domain;
 using BingMaps.Core.Repositories;
+using BingMaps.Core.Services;
 using BingMaps.Web.Models;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace BingMaps.Web.Controllers
@@ -9,13 +13,19 @@ namespace BingMaps.Web.Controllers
     public class HomeController : Controller
     {
         private readonly IRepository<Point> _repository;
-        public HomeController(IRepository<Point> repository)
+        private readonly IPointService _pointService;
+        private readonly IMapper _mapper;
+        public HomeController(IRepository<Point> repository, IPointService pointService, IMapper mapper)
         {
             _repository = repository;
+            _pointService = pointService;
+            _mapper = mapper;
         }
         public ActionResult Index()
         {
-            return View(new PointViewModel { City = "Kraków" });
+            // var points = await _pointService.GetListOfPointAsync("Kraków Chmieleniec");
+           // var model = _mapper.Map<List<PointViewModel>>(points);
+            return View();
         }
 
         public ActionResult About()

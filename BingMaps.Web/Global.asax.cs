@@ -1,14 +1,13 @@
-﻿using BingMaps.Core.Domain;
+﻿using AutoMapper;
+
+using BingMaps.Core.Domain;
 using BingMaps.Core.EF;
 using BingMaps.Core.Repositories;
+using BingMaps.Core.Services;
+using BingMaps.Web.Config;
 using SimpleInjector;
 using SimpleInjector.Integration.Web;
 using SimpleInjector.Integration.Web.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
@@ -19,23 +18,13 @@ namespace BingMaps.Web
     {
         protected void Application_Start()
         {
-            var container = new Container();
-            container.Options.DefaultScopedLifestyle = new WebRequestLifestyle();
-
-            container.Register<BingMapContext>(Lifestyle.Singleton);
-            container.Register<IRepository<Point>, Repository<Point>>();
-
-            container.Verify();
-
-            DependencyResolver.SetResolver(new SimpleInjectorDependencyResolver(container));
-
-
+            DependencyResolver.SetResolver(new SimpleInjectorDependencyResolver(SimpleInjectorConfig.Config()));
 
             AreaRegistration.RegisterAllAreas();
-
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-            BundleConfig.RegisterBundles(BundleTable.Bundles);  
+            BundleConfig.RegisterBundles(BundleTable.Bundles);
+            
         }
     }
 }
