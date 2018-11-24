@@ -8,8 +8,13 @@ namespace BingMaps.Core.Domain
 {
     public abstract class Entity
     {
-        public Guid Id { get; protected set; }
-        public DateTime Create { get; protected set; }
+        public int Id { get; protected set; }
+        public DateTime CreateAt { get; protected set; }
         public DateTime UpdatedAt { get; protected set; }
+        public Entity()
+        {
+            CreateAt = DateTime.UtcNow;
+            UpdatedAt = DateTime.UtcNow;
+        }
     }
 }

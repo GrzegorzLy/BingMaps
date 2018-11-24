@@ -9,10 +9,10 @@ namespace BingMaps.Core.Repositories
 {
     public interface IRepository<T> where T : Entity
     {
-        Task<T> GetAsync(Guid id);
-        Task<IQueryable<T>> GetAllAsync();
-        Task AddAsync(T entity);
-        Task UpdateAsync(T entity);
-        Task DeleteAsync(T entity);        
+        T Get(int id); 
+        IQueryable<T> GetAll();
+        void Add(T entity);
+        void Update(T entity);
+        void Delete(int id);        
     }
 }

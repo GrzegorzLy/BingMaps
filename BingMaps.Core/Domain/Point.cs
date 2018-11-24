@@ -16,10 +16,8 @@ namespace BingMaps.Core.Domain
             {
             }
 
-            protected Point(string address, double latitude, double longitude)
-            {
-                Create = DateTime.UtcNow;
-                UpdatedAt = DateTime.UtcNow;
+            public Point(string address, double latitude, double longitude) : base()
+            {                         
                 SetAdress(address);
                 SetLatitude(latitude);
                 SetLongitude(longitude);
