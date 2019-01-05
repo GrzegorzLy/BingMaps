@@ -5,15 +5,10 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-
-</div>
-
-<div class="row">
-
-    <h2>Podaj Miasto</h2>
+@using (Html.BeginForm("AddressList", "Home"))
+{
+    <h2>Podaj adres:</h2>
     @Html.LabelEditorValidatorFor(m => m.AddressLine)
-    @Html.LabelDisplayValidatorFor(m => m.DisplayName)
 
-
-</div>
+    <input type="submit" value="Wyślij" />
+}

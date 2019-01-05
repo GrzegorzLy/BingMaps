@@ -21,20 +21,29 @@ namespace BingMaps.Web.Controllers
             _pointService = pointService;
             _mapper = mapper;
         }
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            // var points = await _pointService.GetListOfPointAsync("Kraków Chmieleniec");
-           // var model = _mapper.Map<List<PointViewModel>>(points);
+            var points = await _pointService.GetListOfPointAsync("Kraków Chmieleniec");
+            var model = _mapper.Map<List<PointViewModel>>(points);
             return View();
         }
 
-        public ActionResult About()
+        public async Task<ActionResult> AddressList(PointViewModel model)
         {
-            _repository.Add(new Point("sas", 23323, 2333));
-            var all = _repository.GetAll().ToList();
-            ViewBag.Message = "Your application description page.";
+            var points = await _pointService.GetListOfPointAsync(model.AddressLine);
+            var addresses = _mapper.Map<List<PointViewModel>>(points);
 
-            return View();
+            var entities = _mapper.Map<List<Point>>(addresses);
+            entities.ForEach(e => _repository.Add(e));          
+            
+            return View(addresses);
+        }
+
+        public async Task<ActionResult> About(PointViewModel model)
+        {
+            var points = await _pointService.GetListOfPointAsync(model.AddressLine);
+            var addresses = _mapper.Map<List<PointViewModel>>(points);
+            return View(addresses);
         }
 
         public ActionResult Contact()
